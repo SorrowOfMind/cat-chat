@@ -7,7 +7,7 @@ function App() {
     return (
         <UserContextProvider>
             <Router>
-                <div className="App">
+                <div className="app">
                     <Routes/>
                 </div>
             </Router>

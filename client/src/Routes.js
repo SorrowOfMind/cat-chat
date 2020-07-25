@@ -1,7 +1,7 @@
 import React from 'react'
 import {Switch, Route} from 'react-router-dom';
-import SignUp from './components/SignUp';
-import Chat from './components/Chat';
+import SignUp from './components/SignUp/SignUp';
+import Chat from './components/Chat/Chat';
 
 const Routes = () => {
     return (
