@@ -1,14 +1,11 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
+import {UserContext} from '../contexts/UserContext';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {Link} from 'react-router-dom';
 
 const SignUp = () => {
-    const [username,
-        setUsername] = useState('');
-    const [chatroom,
-        setChatroom] = useState('');
-
+    const {dispatch} = useContext(UserContext)
     return (
         <Formik
             initialValues={{
@@ -24,7 +21,7 @@ const SignUp = () => {
                 .required('Required')
         })}
             onSubmit={values => {
-            console.log(values);
+            dispatch({type: 'SIGN_UP', payload: values})
         }}>{formik => (
                 <div className="form-wrapper">
                     <form onSubmit={formik.handleSubmit}>
