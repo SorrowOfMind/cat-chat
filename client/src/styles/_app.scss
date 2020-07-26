@@ -1,0 +1,10 @@
+.app {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../assets/bg.png') no-repeat center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: content;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+}

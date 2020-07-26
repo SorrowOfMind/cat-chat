@@ -24,19 +24,31 @@ const SignUp = () => {
             window.location = '/chat';
         }}>{formik => (
                 <div className="form-wrapper">
-                    <form onSubmit={formik.handleSubmit} className="form">
-                            <input type="text" id="username" {...formik.getFieldProps('username')} placeholder="Username" className="input"/>
-                            {formik.touched.username && formik.errors.username
+                    <h1 className="title">Join the cat chat!</h1>
+                    <form onSubmit={formik.handleSubmit} className="form clearfix">
+                        <div className="input-wrapper">
+                            <input
+                                type="text"
+                                id="username"
+                                {...formik.getFieldProps('username')}
+                                placeholder="Username"
+                                className="input"/> {formik.touched.username && formik.errors.username
                                 ? <div className="error">{formik.errors.username}</div>
                                 : null}
-                            <input type="text" id="chatroom" {...formik.getFieldProps('chatroom')} placeholder="Chat room" className="input"/>
-                            {formik.touched.chatroom && formik.errors.chatroom
+                        </div>
+                        <div className="input-wrapper">
+                            <input
+                                type="text"
+                                id="chatroom"
+                                {...formik.getFieldProps('chatroom')}
+                                placeholder="Chat room"
+                                className="input"/> {formik.touched.chatroom && formik.errors.chatroom
                                 ? <div className="error">{formik.errors.chatroom}</div>
                                 : null}
-                        <button type="submit" className="btn-submit btn waves-effect waves-light">Join
-                        </button>
+                        </div>
+                        <button type="submit" className="btn-submit">Join</button>
                     </form>
-                    </div>
+                </div>
             )}
         </Formik>
     )
