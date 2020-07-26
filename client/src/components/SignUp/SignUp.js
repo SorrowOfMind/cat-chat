@@ -1,9 +1,11 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {UserContext} from '../../contexts/UserContext';
 import {Formik} from 'formik';
+import {Redirect} from 'react-router-dom';
 import * as Yup from 'yup';
 
 const SignUp = () => {
+    const [redirect, setRedirect] = useState(false)
     const {dispatch} = useContext(UserContext)
     return (
         <Formik
@@ -21,7 +23,7 @@ const SignUp = () => {
         })}
             onSubmit={values => {
             dispatch({type: 'SIGN_UP', payload: values});
-            window.location = '/chat';
+            setRedirect(true);
         }}>{formik => (
                 <div className="form-wrapper">
                     <h1 className="title">Join the cat chat!</h1>
@@ -47,6 +49,7 @@ const SignUp = () => {
                                 : null}
                         </div>
                         <button type="submit" className="btn-submit">Join</button>
+                        {redirect ? <Redirect to="/chat"/> : null}
                     </form>
                 </div>
             )}
