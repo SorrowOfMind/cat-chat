@@ -1,7 +1,6 @@
 const users = [];
 
 const addUser = ({id, username, chatroom}) => {
-    console.log('addUsers fn:', username, chatroom)
     username = username.trim().toLowerCase();
     chatroom = chatroom.trim().toLowerCase();
 

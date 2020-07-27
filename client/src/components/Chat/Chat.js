@@ -24,9 +24,8 @@ const Chat = () => {
 
     useEffect(() => {
         socket.on('msg', data => {
-            setMsgs(prevMsgs => ([...prevMsgs, data]))
+            setMsgs([...msgs, data])
         })
-
     }, [msgs]);
 
     const handleChange = e => {
@@ -35,14 +34,12 @@ const Chat = () => {
     }
 
     const handleKeyDown = e => {
-        if (e.keyCode === 13) sendMsg();
+        if (e.keyCode === 13) sendMsg(e);
     }
 
     const sendMsg = e => {
         e.preventDefault();
-        if (msg) {
-            socket.emit('sendMsg', msg, () => setMsg(''))
-        }
+        if (msg) socket.emit('sendMsg', msg, () => setMsg(''))
     }
 
     console.log('chat', msg, msgs);
