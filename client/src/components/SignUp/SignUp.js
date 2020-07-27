@@ -5,8 +5,8 @@ import {Redirect} from 'react-router-dom';
 import * as Yup from 'yup';
 
 const SignUp = () => {
-    const [redirect, setRedirect] = useState(false)
-    const {dispatch} = useContext(UserContext)
+    const [redirect, setRedirect] = useState(false);
+    const {dispatch} = useContext(UserContext);
     return (
         <Formik
             initialValues={{

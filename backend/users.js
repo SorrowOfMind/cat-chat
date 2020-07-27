@@ -1,11 +1,11 @@
 const users = [];
 
 const addUser = ({id, username, chatroom}) => {
-    username = usernmae.trim().toLowerCase();
+    username = username.trim().toLowerCase();
     chatroom = chatroom.trim().toLowerCase();
 
     const userExists = users.find(user => user.username === username && user.chatroom === chatroom);
-    if(userExists) return {error: 'Username is already taken'}
+    if (userExists) return {error: 'Username is already taken'}
 
     const newUser = {id, username, chatroom}
     users.push(newUser);
