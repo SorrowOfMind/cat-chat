@@ -1,6 +1,9 @@
 import React, {useEffect, useContext, useState} from 'react';
 import {UserContext} from '../../contexts/UserContext';
+import {Link} from 'react-router-dom';
 import io from 'socket.io-client';
+
+import Header from './Header';
 
 let socket;
 
@@ -44,16 +47,23 @@ const Chat = () => {
 
     console.log('chat', msg, msgs);
     return (
-        <div className="wrapper">
-            <div>
+        <div className="chat-wrapper">
+            <Header username={username} chatroom={chatroom} />
+            <main className="chatbox">
+
+            </main>
+            <footer className="input-box">
                 <input 
-                    type="text" 
+                    type="text"
+                    className="msg-input"
                     value={msg} 
-                    onChange={handleChange} 
+                    onChange={handleChange}
+                    placeholder="type a message..."
                     name="msg"
                     onKeyDown={handleKeyDown}
                     />
-            </div>
+                <button className="btn-send">Send</button>
+            </footer>
         </div>
     )
 }

@@ -1,0 +1,66 @@
+.chat-wrapper {
+    position: relative;
+    margin: 0 auto;
+    background: #fff;
+    width: 50%;
+    min-width: 340px;
+    max-width: 500px;
+    height: 80vh;
+    min-height: 600px;
+    overflow: hidden;
+    color: #222;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.chat-header {
+    background: url('../../assets/cat-brown.png') no-repeat, $color-main;
+    background-position: top 1rem right 3rem;
+    background-size: 120px;
+    padding: 1rem 2rem;
+    .room {
+        font-size: 2rem;
+    }
+    .name {
+        font-weight: normal;
+        font-size: 1.4rem;
+    }
+    .close {
+        font-weight: bold;
+        position: absolute;
+        font-size: 2rem;
+        top: 1rem;
+        right: 1.5rem;
+        cursor: pointer;
+        transition: transform .2s;
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+ 
+}
+
+.input-box {
+    display: flex;
+    justify-content: space-between;
+    .msg-input {
+        padding: 2rem 1rem;
+        font-size: 1.5rem;
+        width: 80%;
+        border-top: 1px solid $color-main;
+    }
+    .btn-send {
+        width: 20%;
+        background-color: $color-main;
+        font-size: 1.8rem;
+        color: #fff;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background .2s;
+        &:hover {
+            background-color: $color-main-hover;
+        }
+    }
+}
