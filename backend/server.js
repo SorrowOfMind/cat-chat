@@ -19,12 +19,22 @@ const io = socket(server);
 io.on('connection', socket => {
     socket.on('join', ({username, chatroom}, callback) => {
         const {error, newUser} = addUser({id: socket.id, username, chatroom});
-
         if (error) return callback(error);
-        socket.emit('msg', {username: 'catbot', text: `Hi ${newUser.username}. Welcome to chat room ${newUser.chatroom}.`});
+        socket.emit('msg', {username: 'catbot', text: `Hi ${newUser.username}. Welcome to chat room "${newUser.chatroom}".`});
         socket.broadcast.to(newUser.chatroom).emit('msg', {username: 'catbot', text: `${newUser.username} has joined the room.`})
         socket.join(newUser.chatroom);
-    })
+
+        callback();
+    });
+
+    socket.on('sendMsg', (data, callback) => {
+        const user = getUser(socket.id);
+
+        io.to(user.chatroom).emit('msg', {username: user.username, text: data.msg});
+
+        callback();
+    });
+
     socket.on('disconnect', () => {
         console.log('User just left');
     });
