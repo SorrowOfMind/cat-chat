@@ -14,12 +14,8 @@ const SignUp = () => {
             chatroom: ''
         }}
             validationSchema={Yup.object({
-            username: Yup
-                .string()
-                .required('Required'),
-            chatroom: Yup
-                .string()
-                .required('Required')
+            username: Yup.string().required('Required'),
+            chatroom: Yup.string().required('Required')
         })}
             onSubmit={values => {
             dispatch({type: 'SIGN_UP', payload: values});

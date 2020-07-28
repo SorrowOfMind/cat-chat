@@ -29,9 +29,7 @@ const Chat = () => {
     }, [endpoint, username, chatroom]);
 
     useEffect(() => {
-        socket.on('msg', data => {
-            setMsgs([...msgs, data])
-        })
+        socket.on('msg', data => setMsgs([...msgs, data]))
     }, [msgs]);
 
 

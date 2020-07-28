@@ -2,12 +2,9 @@ import React from 'react';
 
 const Msg = ({message, username}) => {
     let isCurrentUser = false
-    const formattedUsername = username
-        .trim()
-        .toLowerCase();
+    const formattedUsername = username.trim().toLowerCase();
 
-    if (message.username === formattedUsername) 
-        isCurrentUser = true;
+    if (message.username === formattedUsername) isCurrentUser = true;
     return (isCurrentUser
         ? (
             <div className="msg-wrapper align-right">
