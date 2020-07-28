@@ -14,7 +14,7 @@ const addUser = ({id, username, chatroom}) => {
 
 const removeUser = id => {
     const userIdx = users.findIndex(user => user.id === id);
-    if (userIdx !== -1) return users.splice(userIdx,1);
+    if (userIdx !== -1) return users.splice(userIdx,1)[0];
 };
 
 const getUser = id => users.find(user => user.id === id);

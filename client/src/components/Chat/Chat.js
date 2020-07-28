@@ -1,10 +1,11 @@
 import React, {useEffect, useContext, useState} from 'react';
 import {UserContext} from '../../contexts/UserContext';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import io from 'socket.io-client';
 
 import Header from './Header';
 import Input from './Input';
+import MsgBox from './MsgBox';
 
 let socket;
 
@@ -15,9 +16,10 @@ const Chat = () => {
     const endpoint = 'localhost:5000';
 
     useEffect(() => {
+        if (!username || !chatroom) return window.location.replace('/');
         socket = io.connect(endpoint);
-        socket.emit('join', {username, chatroom}, () => {
-
+        socket.emit('join', {username, chatroom}, err => {
+            if (err) alert(err)
         });
 
         return () => {
@@ -31,6 +33,7 @@ const Chat = () => {
             setMsgs([...msgs, data])
         })
     }, [msgs]);
+
 
     const handleChange = e => {
         const {value} = e.target;
@@ -46,13 +49,10 @@ const Chat = () => {
         if (msg) socket.emit('sendMsg', msg, () => setMsg(''))
     }
 
-    console.log('chat', msg, msgs);
     return (
         <div className="chat-wrapper">
             <Header username={username} chatroom={chatroom} />
-            <main className="chatbox">
-
-            </main>
+            <MsgBox msgs={msgs} username={username}/>
             <Input 
                 msg={msg} 
                 handleChange={handleChange} 
