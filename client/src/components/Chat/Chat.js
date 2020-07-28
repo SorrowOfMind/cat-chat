@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import io from 'socket.io-client';
 
 import Header from './Header';
+import Input from './Input';
 
 let socket;
 
@@ -52,18 +53,11 @@ const Chat = () => {
             <main className="chatbox">
 
             </main>
-            <footer className="input-box">
-                <input 
-                    type="text"
-                    className="msg-input"
-                    value={msg} 
-                    onChange={handleChange}
-                    placeholder="type a message..."
-                    name="msg"
-                    onKeyDown={handleKeyDown}
-                    />
-                <button className="btn-send">Send</button>
-            </footer>
+            <Input 
+                msg={msg} 
+                handleChange={handleChange} 
+                handleKeyDown={handleKeyDown} 
+                sendMsg={sendMsg}/>
         </div>
     )
 }
