@@ -1,6 +1,6 @@
 import React, {useEffect, useContext, useState} from 'react';
 import {UserContext} from '../../contexts/UserContext';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import io from 'socket.io-client';
 
 import Header from './Header';
@@ -16,9 +16,10 @@ const Chat = () => {
     const endpoint = 'localhost:5000';
 
     useEffect(() => {
+        if (!username || !chatroom) return window.location.replace('/');
         socket = io.connect(endpoint);
-        socket.emit('join', {username, chatroom}, () => {
-
+        socket.emit('join', {username, chatroom}, err => {
+            if (err) alert(err)
         });
 
         return () => {
@@ -32,6 +33,7 @@ const Chat = () => {
             setMsgs([...msgs, data])
         })
     }, [msgs]);
+
 
     const handleChange = e => {
         const {value} = e.target;

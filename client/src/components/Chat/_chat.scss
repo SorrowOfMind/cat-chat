@@ -5,7 +5,6 @@
     width: 50%;
     min-width: 340px;
     max-width: 500px;
-    height: 80vh;
     min-height: 600px;
     overflow: hidden;
     color: #222;
@@ -13,6 +12,7 @@
     flex-flow: column nowrap;
     justify-content: space-between;
     align-items: stretch;
+    box-shadow: 1px 1px 10px 0 rgba(0,0,0,0.1), -1px -1px 10px 0 rgba(0,0,0,0.1);
 }
 
 .chat-header {
@@ -20,6 +20,7 @@
     background-position: top 1.5rem right 3rem;
     background-size: 120px;
     padding: 1rem 2rem;
+    height: 65px;
     .room {
         font-size: 2rem;
     }
@@ -54,7 +55,7 @@
     .btn-send {
         width: 20%;
         background-color: $color-main;
-        font-size: 1.8rem;
+        font-size: 1.7rem;
         color: #fff;
         text-transform: uppercase;
         cursor: pointer;
@@ -65,11 +66,33 @@
     }
 }
 
+.chatbox {
+    overflow: auto;
+    flex: 1;
+    display:flex;
+    flex-direction: column;
+}
+
 .msg-wrapper {
-    height: 100%;
-    border: 1px solid red;
+    padding: 1rem .8rem;
+    display: flex;
+    flex-flow: column nowrap;
+    &.align-right {
+        align-items: flex-end;
+    }
+    .username {
+        font-size: 1.2rem;
+        padding: .2rem .8rem;
+    }
     .msg {
-        background-color: rgb(204, 204, 204);
+        background-color: rgb(221, 221, 221);
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        text-align: center;
+        width: max-content;
+        &.msg_color {
+            background-color: $color-main;
+        }
         .msg__text {
             font-size: 1.4rem;
         }

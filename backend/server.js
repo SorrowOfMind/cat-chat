@@ -35,7 +35,9 @@ io.on('connection', socket => {
     });
 
     socket.on('disconnect', () => {
-        console.log('User just left');
+        const user = removeUser(socket.id);
+        console.log(user);
+        if (user) io.to(user.chatroom).emit('msg', {username: 'catbot', text: `${user.username} has left.`})
     });
 });
 

@@ -10,9 +10,9 @@ const Msg = ({message, username}) => {
         isCurrentUser = true;
     return (isCurrentUser
         ? (
-            <div className="msg-wrapper">
+            <div className="msg-wrapper align-right">
                 <p className="username">{message.username}</p>
-                <div className="msg">
+                <div className="msg msg_color">
                     <p className="msg__text">{message.text}</p>
                 </div>
             </div>
