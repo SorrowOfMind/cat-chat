@@ -64,3 +64,14 @@
         }
     }
 }
+
+.msg-wrapper {
+    height: 100%;
+    border: 1px solid red;
+    .msg {
+        background-color: rgb(204, 204, 204);
+        .msg__text {
+            font-size: 1.4rem;
+        }
+    }
+}

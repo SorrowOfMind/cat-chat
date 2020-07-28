@@ -5,6 +5,7 @@ import io from 'socket.io-client';
 
 import Header from './Header';
 import Input from './Input';
+import MsgBox from './MsgBox';
 
 let socket;
 
@@ -46,13 +47,10 @@ const Chat = () => {
         if (msg) socket.emit('sendMsg', msg, () => setMsg(''))
     }
 
-    console.log('chat', msg, msgs);
     return (
         <div className="chat-wrapper">
             <Header username={username} chatroom={chatroom} />
-            <main className="chatbox">
-
-            </main>
+            <MsgBox msgs={msgs} username={username}/>
             <Input 
                 msg={msg} 
                 handleChange={handleChange} 
