@@ -24,6 +24,8 @@ io.on('connection', socket => {
         socket.broadcast.to(newUser.chatroom).emit('msg', {username: 'catbot', text: `${newUser.username} has joined the room.`})
         socket.join(newUser.chatroom);
 
+        socket.to(newUser.chatroom).emit('roomUsers', {chatroom: newUser.chatroom, users: getUsersInRoom(newUser.chatroom)})
+
         callback();
     });
 
@@ -37,7 +39,10 @@ io.on('connection', socket => {
     socket.on('disconnect', () => {
         const user = removeUser(socket.id);
         console.log(user);
-        if (user) io.to(user.chatroom).emit('msg', {username: 'catbot', text: `${user.username} has left.`})
+        if (user) {
+            io.to(user.chatroom).emit('msg', {username: 'catbot', text: `${user.username} has left.`})
+            io.to(user.chatroom).emit('roomUsers',{chatroom: user.chatroom, users: getUsersInRoom(user.chatroom)})
+        }
     });
 });
 
