@@ -1,6 +1,5 @@
 import React, {useEffect, useContext, useState} from 'react';
 import {UserContext} from '../../contexts/UserContext';
-import {Link, Redirect} from 'react-router-dom';
 import io from 'socket.io-client';
 
 import Header from './Header';
@@ -10,7 +9,7 @@ import MsgBox from './MsgBox';
 let socket;
 
 const Chat = () => {
-    const {user: {username, chatroom}} = useContext(UserContext);
+    const {user: {username, chatroom}, dispatch} = useContext(UserContext);
     const [msg, setMsg] = useState('');
     const [msgs, setMsgs] = useState([]);
     const endpoint = 'localhost:5000';
@@ -25,6 +24,7 @@ const Chat = () => {
         return () => {
             socket.emit('disconnect');
             socket.off();
+            dispatch({type: 'CLEAR_DATA'})
         };
     }, [endpoint, username, chatroom]);
 
@@ -42,6 +42,10 @@ const Chat = () => {
         if (e.keyCode === 13) sendMsg(e);
     }
 
+    const handleClosing = () => {
+        window.location.replace('/')
+    }
+
     const sendMsg = e => {
         e.preventDefault();
         if (msg) socket.emit('sendMsg', msg, () => setMsg(''))
@@ -49,7 +53,7 @@ const Chat = () => {
 
     return (
         <div className="chat-wrapper">
-            <Header username={username} chatroom={chatroom} />
+            <Header username={username} chatroom={chatroom} socket={socket} handleClosing={handleClosing}/>
             <MsgBox msgs={msgs} username={username}/>
             <Input 
                 msg={msg} 
