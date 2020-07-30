@@ -18,15 +18,15 @@
 .chat-header {
     background: url('../../assets/cat-brown.png') no-repeat, $color-main;
     background-position: top 1.5rem right 3rem;
-    background-size: 120px;
+    background-size: 145px;
     padding: 1rem 2rem;
-    height: 65px;
+    height: 80px;
     .room {
         font-size: 2rem;
     }
     .name {
         font-weight: normal;
-        font-size: 1.4rem;
+        font-size: 1.3rem;
     }
     .close {
         font-weight: bold;
@@ -69,7 +69,7 @@
 .chatbox {
     overflow: auto;
     flex: auto;
-    max-height: 500px;
+    max-height: 465px;
 }
 
 .msg-wrapper {

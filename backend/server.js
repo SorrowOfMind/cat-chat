@@ -2,20 +2,21 @@ const express = require('express');
 const morgan = require('morgan');
 const socket = require('socket.io');
 const cors = require('cors');
-const server = require('http').createServer();
 
 const {addUser, removeUser, getUser, getUsersInRoom} = require('./users');
+
+const app = express();
 
 const port = process.env.PORT || 5000;
 const router = require('./routes/router')
 
-const app = express();
+const server = app.listen(port,  () => console.log(`Running on port ${port}`));
 
 app.use(morgan('dev'));
 app.use(cors());
 app.use(router);
 
-const io = socket(server);
+const io = socket(server, {transports: ['websocket', 'polling'] });
 
 io.on('connection', socket => {
     socket.on('join', ({username, chatroom}, callback) => {
@@ -40,7 +41,6 @@ io.on('connection', socket => {
 
     socket.on('disconnect', () => {
         const user = removeUser(socket.id);
-        console.log(user);
         if (user) {
             io.to(user.chatroom).emit('msg', {username: 'catbot', text: `${user.username} has left.`})
             io.to(user.chatroom).emit('roomUsers',{chatroom: user.chatroom, users: getUsersInRoom(user.chatroom)})
@@ -48,4 +48,3 @@ io.on('connection', socket => {
     });
 });
 
-server.listen(port,  () => console.log(`Running on port ${port}`));
