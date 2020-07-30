@@ -6,7 +6,7 @@ const Input = ({msg, handleChange, handleKeyDown, sendMsg}) => {
                 <input 
                     type="text"
                     className="msg-input"
-                    value={msg} 
+                    value={msg}
                     onChange={handleChange}
                     placeholder="type a message..."
                     name="msg"
