@@ -1,4 +1,4 @@
-import React, {useEffect, useContext, useState} from 'react';
+import React, {useEffect, useContext, useState, useRef} from 'react';
 import {UserContext} from '../../contexts/UserContext';
 import io from 'socket.io-client';
 
@@ -7,12 +7,15 @@ import Input from './Input';
 import MsgBox from './MsgBox';
 
 let socket;
+const endpoint = 'localhost:5000';
 
 const Chat = () => {
     const {user: {username, chatroom}, dispatch} = useContext(UserContext);
     const [msg, setMsg] = useState('');
     const [msgs, setMsgs] = useState([]);
-    const endpoint = 'localhost:5000';
+    // const [users, setUsers] = useState([]);
+
+    const chatboxRef = useRef(null);
 
     useEffect(() => {
         if (!username || !chatroom) return window.location.replace('/');
@@ -26,10 +29,12 @@ const Chat = () => {
             socket.off();
             dispatch({type: 'CLEAR_DATA'})
         };
-    }, [endpoint, username, chatroom]);
+    }, [username, chatroom]);
 
     useEffect(() => {
         socket.on('msg', data => setMsgs([...msgs, data]))
+        socket.on('roomUsers', ({users}) => console.log(users))
+        scrollToBottom();
     }, [msgs]);
 
 
@@ -51,10 +56,15 @@ const Chat = () => {
         if (msg) socket.emit('sendMsg', msg, () => setMsg(''))
     }
 
+    const scrollToBottom = () => {
+        const scroll = chatboxRef.current.scrollHeight -  chatboxRef.current.clientHeight;
+        chatboxRef.current.scrollTo(0, scroll);
+    }
+
     return (
         <div className="chat-wrapper">
             <Header username={username} chatroom={chatroom} socket={socket} handleClosing={handleClosing}/>
-            <MsgBox msgs={msgs} username={username}/>
+            <MsgBox msgs={msgs} username={username} ref={chatboxRef}/>
             <Input 
                 msg={msg} 
                 handleChange={handleChange} 

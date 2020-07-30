@@ -1,14 +1,15 @@
 import React from 'react';
-import ScrollToBottom from 'react-scroll-to-bottom';
+// import ScrollToBottom from 'react-scroll-to-bottom';
 
 import Msg from './Msg';
 
-const MsgBox = ({msgs, username}) => {
+const MsgBox = ({msgs, username}, ref) => {
     return (
-        <ScrollToBottom className="chatbox">
+        <div className="chatbox" ref={ref}>
             {msgs.map((message, idx) => <div key={idx}><Msg message={message} username={username} /></div>)}
-        </ScrollToBottom>
+        </div>
     )
 }
 
-export default MsgBox;
+const forwardedMsgBox = React.forwardRef(MsgBox);
+export default forwardedMsgBox;
