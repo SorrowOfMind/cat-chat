@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactEmoji from 'react-emoji';
 
 const Msg = ({message, username}) => {
     let isCurrentUser = false
@@ -10,7 +11,7 @@ const Msg = ({message, username}) => {
             <div className="msg-wrapper align-right">
                 <p className="username">{message.username}</p>
                 <div className="msg msg_color">
-                    <p className="msg__text">{message.text}</p>
+                    <p className="msg__text">{ReactEmoji.emojify(message.text)}</p>
                 </div>
             </div>
         )
@@ -18,7 +19,7 @@ const Msg = ({message, username}) => {
             <div className="msg-wrapper">
                 <p className="username">{message.username}</p>
                 <div className="msg">
-                    <p className="msg__text">{message.text}</p>
+                    <p className="msg__text">{ReactEmoji.emojify(message.text)}</p>
                 </div>
             </div>
         ))
